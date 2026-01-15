@@ -5,38 +5,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Baby Shower Emma Sofía</title>
-    
+
     <!-- Meta descripción -->
-    <meta name="description" content="Con el corazón lleno de alegría te invitamos a celebrar el Baby Shower de nuestra amada Emma Sofía 👶💖. Estamos viviendo una etapa muy especial y nos encantaría compartir este momento tan bonito contigo. Fecha: 8 de febrero de 2026 a las 14:00 hrs. Lugar: Ignacio Comonfort #15, Col. Ampliación San Pedro Xalpa, Azcapotzalco, CDMX. Tu presencia hará este día aún más especial. ¡Te esperamos con mucho cariño!">
-    
+    <meta name="description"
+        content="Con el corazón lleno de alegría te invitamos a celebrar el Baby Shower de nuestra amada Emma Sofía 👶💖. Estamos viviendo una etapa muy especial y nos encantaría compartir este momento tan bonito contigo. Fecha: 8 de febrero de 2026 a las 14:00 hrs. Lugar: Ignacio Comonfort #15, Col. Ampliación San Pedro Xalpa, Azcapotzalco, CDMX. Tu presencia hará este día aún más especial. ¡Te esperamos con mucho cariño!">
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://giorey.github.io/invite-juan/">
     <meta property="og:title" content="Baby Shower Emma Sofía 🌸">
-    <meta property="og:description" content="Con el corazón lleno de alegría te invitamos a celebrar el Baby Shower de nuestra amada Emma Sofía 👶💖. Estamos viviendo una etapa muy especial y nos encantaría compartir este momento tan bonito contigo. 📅 8 de febrero de 2026, 14:00 hrs. 📍 Ignacio Comonfort #15, Azcapotzalco, CDMX. Tu presencia hará este día aún más especial.">
+    <meta property="og:description"
+        content="Con el corazón lleno de alegría te invitamos a celebrar el Baby Shower de nuestra amada Emma Sofía 👶💖. Estamos viviendo una etapa muy especial y nos encantaría compartir este momento tan bonito contigo. 📅 8 de febrero de 2026, 14:00 hrs. 📍 Ignacio Comonfort #15, Azcapotzalco, CDMX. Tu presencia hará este día aún más especial.">
     <meta property="og:image" content="https://giorey.github.io/invite-juan/emma_sofia.jpeg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="1200">
     <meta property="og:locale" content="es_MX">
     <meta property="og:site_name" content="Baby Shower Emma Sofía">
-    
+
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://giorey.github.io/invite-juan/">
     <meta name="twitter:title" content="Baby Shower Emma Sofía 🌸">
-    <meta name="twitter:description" content="Con el corazón lleno de alegría te invitamos a celebrar el Baby Shower de nuestra amada Emma Sofía 👶💖. Estamos viviendo una etapa muy especial y nos encantaría compartir este momento tan bonito contigo. 📅 8 de febrero de 2026, 14:00 hrs. 📍 Ignacio Comonfort #15, Azcapotzalco, CDMX.">
+    <meta name="twitter:description"
+        content="Con el corazón lleno de alegría te invitamos a celebrar el Baby Shower de nuestra amada Emma Sofía 👶💖. Estamos viviendo una etapa muy especial y nos encantaría compartir este momento tan bonito contigo. 📅 8 de febrero de 2026, 14:00 hrs. 📍 Ignacio Comonfort #15, Azcapotzalco, CDMX.">
     <meta name="twitter:image" content="https://giorey.github.io/invite-juan/emma_sofia.jpeg">
-    
-    <!-- WhatsApp específico -->
-    <meta property="og:image:alt" content="Invitación Baby Shower Emma Sofía">
-    
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --soft-pink: #fdf2f7;
             --main-pink: #f472b6;
-            --accent-peach: #fb923c;
+            --dark-pink: #ec4899;
         }
 
         body {
@@ -44,13 +44,155 @@
             background-color: var(--soft-pink);
             color: #4a4a4a;
             scroll-behavior: smooth;
+            overflow: hidden;
+            /* Bloqueado hasta que termine el juego */
         }
 
         .font-cursive {
             font-family: 'Dancing Script', cursive;
         }
 
-        /* Animaciones base */
+        /* --- Pantalla Inicial de Juego --- */
+        #intro-game {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(to bottom, #fdf2f7, #ffe4e6);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transition: opacity 0.8s ease-in-out;
+        }
+
+        #name-display {
+            transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.8s ease;
+        }
+
+        .letter-slot {
+            display: inline-block;
+            width: 35px;
+            height: 55px;
+            margin: 0 4px;
+            border-bottom: 4px solid #f472b6;
+            font-size: 2.8rem;
+            font-family: 'Dancing Script', cursive;
+            color: #ec4899;
+            vertical-align: bottom;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @media (min-width: 640px) {
+            .letter-slot {
+                width: 55px;
+                height: 75px;
+                font-size: 4.5rem;
+                margin: 0 8px;
+            }
+        }
+
+        .letter-slot.revealed {
+            opacity: 1;
+            transform: scale(1);
+            border-bottom-color: transparent;
+            animation: softZoom 0.8s ease-out forwards;
+        }
+
+        @keyframes softZoom {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+
+            50% {
+                transform: scale(1.15);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .letter-slot.space {
+            border-bottom: none;
+            width: 20px;
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .slot-underline {
+            display: inline-block;
+            position: relative;
+        }
+
+        .slot-underline::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 5px;
+            right: 5px;
+            height: 3px;
+            background: #f472b6;
+            border-radius: 2px;
+            opacity: 0.4;
+        }
+
+        .slot-underline.revealed::after {
+            display: none;
+        }
+
+        .slot-underline.space::after {
+            display: none;
+        }
+
+        .balloon-game {
+            position: absolute;
+            bottom: -150px;
+            cursor: pointer;
+            z-index: 1010;
+            animation: rise linear forwards;
+            user-select: none;
+        }
+
+        @keyframes rise {
+            from {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            to {
+                transform: translateY(-130vh) rotate(10deg);
+            }
+        }
+
+        /* --- Estilos Fuegos Artificiales --- */
+        .firework-particle {
+            position: absolute;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1100;
+            animation: explode-particle 1.2s ease-out forwards;
+        }
+
+        @keyframes explode-particle {
+            0% {
+                transform: translate(0, 0) scale(1.5);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(var(--tx), var(--ty)) scale(0);
+                opacity: 0;
+            }
+        }
+
+        /* --- Estilos Invitación --- */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -62,7 +204,6 @@
             transform: translateY(0);
         }
 
-        /* Globos flotantes */
         .balloon-float {
             animation: float 6s ease-in-out infinite;
         }
@@ -79,7 +220,6 @@
             }
         }
 
-        /* Nubes decorativas */
         .cloud {
             position: absolute;
             opacity: 0.3;
@@ -116,10 +256,45 @@
             transform: translateY(-3px);
             box-shadow: 0 15px 25px rgba(244, 114, 182, 0.4);
         }
+
+        /* Estilo para el nombre en el Hero que espera oculto */
+        #hero-name {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        #hero-name.visible {
+            opacity: 1;
+        }
     </style>
 </head>
 
 <body class="overflow-x-hidden selection:bg-pink-200">
+
+    <!-- Pantalla Inicial de Juego -->
+    <div id="intro-game">
+        <div id="game-content" class="z-20 px-4 w-full transition-all duration-700">
+            <h2 id="intro-subtitle" class="text-pink-400 font-bold uppercase tracking-[0.3em] text-[10px] md:text-xs mb-12">Descubre el nombre de
+                nuestra pequeña</h2>
+
+            <div id="name-display" class="mb-16 select-none flex justify-center flex-wrap items-end">
+                <!-- Generado por JS -->
+            </div>
+
+            <div id="game-status" class="text-pink-300 text-sm italic animate-pulse bg-white/40 inline-block px-6 py-2 rounded-full backdrop-blur-sm">
+                🎈 ¡Revienta los globos para revelar el nombre! 🎈
+            </div>
+
+            <div class="flex justify-center mt-12">
+                <button id="start-main-btn" onclick="hideGame()"
+                    class="hidden btn-gradient text-white px-10 py-5 rounded-full font-bold text-xl shadow-2xl scale-0 transition-all duration-500">
+                    Comenzemos! 💖
+                </button>
+            </div>
+        </div>
+        <!-- Contenedor para globos subiendo -->
+        <div id="balloon-container" class="absolute inset-0 overflow-hidden pointer-events-none"></div>
+    </div>
 
     <!-- Fondo de nubes -->
     <div class="fixed inset-0 pointer-events-none overflow-hidden h-full w-full">
@@ -132,22 +307,27 @@
     <!-- Hero Section -->
     <header class="relative min-h-screen flex flex-col items-center justify-center p-6 text-center z-10">
         <div class="balloon-float mb-12">
-            <div class="text-[100px] md:text-[140px] drop-shadow-xl">🌸🎈</div>
+            <div class="text-[100px] md:text-[140px] drop-shadow-xl">🌸</div>
         </div>
-        <div class="reveal active">
+        <div class="reveal">
             <span class="text-pink-400 uppercase tracking-[0.4em] text-xs font-bold mb-4 block">Estás invitado</span>
-            <h1 class="font-cursive text-7xl md:text-9xl text-pink-500 mb-6 drop-shadow-sm">Emma Sofía</h1>
-            <p class="text-pink-400 italic text-lg max-w-xs mx-auto mb-12">Baby Shower</p>
-            <div class="animate-bounce mt-10 text-pink-300">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <!-- ID hero-name para sincronizar con el efecto hero -->
+            <h1 id="hero-name" class="font-cursive text-7xl md:text-9xl text-pink-500 mb-6 drop-shadow-sm">Emma Sofía</h1>
+            <p class="text-pink-400 italic text-lg max-w-xs mx-auto mb-12">a mi Baby Shower</p>
+
+            <!-- Flecha interactiva -->
+            <button onclick="scrollToContent()"
+                class="animate-bounce mt-10 text-pink-300 hover:text-pink-500 transition-colors cursor-pointer outline-none"
+                aria-label="Ir al contenido">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                 </svg>
-            </div>
+            </button>
         </div>
     </header>
 
     <!-- Bienvenida Section -->
-    <section class="relative py-20 px-6 z-10">
+    <section id="bienvenida" class="relative py-20 px-6 z-10">
         <div class="max-w-xl mx-auto text-center reveal">
             <div class="relative inline-block mb-10">
                 <div class="absolute -inset-4 border-2 border-dashed border-pink-200 rounded-full animate-[spin_30s_linear_infinite]"></div>
@@ -282,25 +462,199 @@
     </footer>
 
     <script>
-        // Sistema de revelación al hacer scroll
-        const observerOptions = {
-            threshold: 0.15
-        };
+        const targetName = "Emma Sofía";
+        const nameDisplay = document.getElementById('name-display');
+        const balloonContainer = document.getElementById('balloon-container');
+        const startMainBtn = document.getElementById('start-main-btn');
+        const gameStatus = document.getElementById('game-status');
+        const heroName = document.getElementById('hero-name');
 
+        // Letras por revelar (sin espacios)
+        let indicesToReveal = [];
+        for (let i = 0; i < targetName.length; i++) {
+            if (targetName[i] !== " ") indicesToReveal.push(i);
+        }
+
+        // Mezclar indices para revelación aleatoria
+        indicesToReveal.sort(() => Math.random() - 0.5);
+
+        // Crear slots de letras
+        for (let i = 0; i < targetName.length; i++) {
+            const underline = document.createElement('span');
+            underline.className = 'slot-underline';
+            if (targetName[i] === " ") underline.classList.add('space');
+
+            const slot = document.createElement('span');
+            slot.className = 'letter-slot';
+            slot.id = 'slot-' + i;
+            if (targetName[i] === " ") {
+                slot.classList.add('space');
+                slot.innerText = "\u00A0";
+            } else {
+                slot.innerText = targetName[i];
+            }
+            underline.appendChild(slot);
+            nameDisplay.appendChild(underline);
+        }
+
+        function triggerFirework(x, y) {
+            const colors = ['#f472b6', '#ec4899', '#f9a8d4', '#fb923c', '#ffffff'];
+            const particlesCount = 35;
+
+            for (let i = 0; i < particlesCount; i++) {
+                const p = document.createElement('div');
+                p.className = 'firework-particle';
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                p.style.backgroundColor = color;
+                p.style.boxShadow = `0 0 10px ${color}`;
+
+                p.style.left = x + 'px';
+                p.style.top = y + 'px';
+
+                const angle = Math.random() * Math.PI * 2;
+                const dist = 60 + Math.random() * 150;
+                p.style.setProperty('--tx', `${Math.cos(angle) * dist}px`);
+                p.style.setProperty('--ty', `${Math.sin(angle) * dist}px`);
+
+                document.getElementById('intro-game').appendChild(p);
+                setTimeout(() => p.remove(), 1200);
+            }
+        }
+
+        function createBalloon() {
+            const balloon = document.createElement('div');
+            balloon.className = 'balloon-game';
+            balloon.style.pointerEvents = 'auto';
+            const size = 60 + Math.random() * 40;
+
+            const isPink = Math.random() > 0.3;
+            const mainColor = isPink ? '#f472b6' : '#ffffff';
+            const borderColor = isPink ? '#ffffff' : '#f472b6';
+            const highlightColor = isPink ? '#fbcfe8' : '#fff5f7';
+
+            balloon.innerHTML = `
+                <div style="
+                    width:${size}px; 
+                    height:${size * 1.3}px; 
+                    background: radial-gradient(circle at 30% 30%, ${highlightColor} 0%, ${mainColor} 70%); 
+                    border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%; 
+                    position: relative; 
+                    border: 3px solid ${borderColor};
+                    box-shadow: inset -5px -10px 15px rgba(0,0,0,0.1), 0 10px 20px rgba(0,0,0,0.1);
+                ">
+                    <div style="position:absolute; bottom:-8px; left:50%; transform:translateX(-50%); width:0; height:0; border-left:8px solid transparent; border-right:8px solid transparent; border-bottom:12px solid ${mainColor}; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1));"></div>
+                </div>
+                <div style="width:2px; height:60px; background:rgba(0,0,0,0.08); margin:0 auto; border-radius:1px;"></div>
+            `;
+
+            balloon.style.left = (Math.random() * 85 + 5) + '%';
+            balloon.style.animationDuration = (6 + Math.random() * 5) + 's';
+
+            const handlePop = (e) => {
+                const rect = balloon.getBoundingClientRect();
+                triggerFirework(rect.left + rect.width / 2, rect.top + rect.height / 2);
+                balloon.remove();
+                revealLetter();
+            };
+
+            balloon.addEventListener('mousedown', handlePop);
+            balloon.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                handlePop();
+            });
+
+            balloonContainer.appendChild(balloon);
+            setTimeout(() => { if (balloon.parentElement) balloon.remove(); }, 12000);
+        }
+
+        function revealLetter() {
+            if (indicesToReveal.length > 0) {
+                const index = indicesToReveal.pop();
+                const slot = document.getElementById('slot-' + index);
+                const underline = slot.parentElement;
+
+                slot.classList.add('revealed');
+                underline.classList.add('revealed');
+
+                if (indicesToReveal.length === 0) {
+                    endGame();
+                }
+            }
+        }
+
+        function endGame() {
+            // Eliminamos el texto de bienvenida en el marcador
+            gameStatus.style.display = 'none';
+
+            // Fuegos artificiales finales
+            let count = 0;
+            const interval = setInterval(() => {
+                const x = Math.random() * window.innerWidth;
+                const y = Math.random() * window.innerHeight * 0.6;
+                triggerFirework(x, y);
+                count++;
+                if (count >= 15) clearInterval(interval);
+            }, 300);
+
+            startMainBtn.classList.remove('hidden');
+            setTimeout(() => {
+                startMainBtn.classList.remove('scale-0');
+            }, 200);
+        }
+
+        function hideGame() {
+            const intro = document.getElementById('intro-game');
+            const gameContent = document.getElementById('game-content');
+            const introSubtitle = document.getElementById('intro-subtitle');
+
+            // Calculamos las posiciones para el efecto hero
+            const sourceRect = nameDisplay.getBoundingClientRect();
+            const targetRect = heroName.getBoundingClientRect();
+
+            // Ocultamos elementos secundarios de la carga
+            introSubtitle.style.opacity = '0';
+            startMainBtn.style.opacity = '0';
+
+            // Calculamos diferencias de escala y traslación
+            const scale = targetRect.width / sourceRect.width;
+            const translateX = (targetRect.left + targetRect.width / 2) - (sourceRect.left + sourceRect.width / 2);
+            const translateY = (targetRect.top + targetRect.height / 2) - (sourceRect.top + sourceRect.height / 2);
+
+            // Aplicamos la transformación hero al contenedor del nombre
+            nameDisplay.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+
+            // Desvanecemos el fondo
+            intro.style.opacity = '0';
+
+            setTimeout(() => {
+                intro.style.display = 'none';
+                document.body.style.overflow = 'auto';
+
+                // Hacemos visible el nombre real del Hero
+                heroName.classList.add('visible');
+
+                // Activamos revelaciones de la invitación
+                document.querySelector('header .reveal').classList.add('active');
+            }, 900);
+        }
+
+        function scrollToContent() {
+            document.getElementById('bienvenida').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        const observerOptions = { threshold: 0.15 };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
+                if (entry.isIntersecting) entry.target.classList.add('active');
             });
         }, observerOptions);
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        // Prevención de scroll lateral por animaciones
-        document.body.addEventListener('touchmove', function (e) {
-            if (e.target.closest('.overflow-x-hidden')) return;
-        }, { passive: true });
+        let balloonInterval = setInterval(createBalloon, 1000);
+        startMainBtn.addEventListener('click', () => clearInterval(balloonInterval));
     </script>
 
 </body>
