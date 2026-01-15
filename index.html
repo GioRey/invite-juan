@@ -289,10 +289,46 @@
         #hero-name.visible {
             opacity: 1;
         }
+
+        /* Control de Audio */
+        #music-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 2000;
+            background: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            border: 2px solid var(--main-pink);
+            color: var(--main-pink);
+            transition: all 0.3s ease;
+        }
+
+        #music-control:active {
+            transform: scale(0.9);
+        }
     </style>
 </head>
 
 <body class="overflow-x-hidden selection:bg-pink-200">
+
+    <!-- Elemento de Audio -->
+    <audio id="bg-music" loop preload="auto">
+        <!-- PEGA TU ENLACE AQUÍ: Borra la URL de abajo y pon tu link directo que termine en .mp3 -->
+        <source src="./song.mp3" type="audio/mpeg">
+        <!--source src="https://giorey.github.io/invite-juan/song.mp3" type="audio/mpeg"-->
+    </audio>
+
+    <!-- Botón de Control de Música -->
+    <div id="music-control" onclick="toggleMusic()">
+        <span id="music-icon">🎵</span>
+    </div>
 
     <!-- Pantalla Inicial de Juego -->
     <div id="intro-game">
@@ -491,6 +527,40 @@
         const startMainBtn = document.getElementById('start-main-btn');
         const gameStatus = document.getElementById('game-status');
         const heroName = document.getElementById('hero-name');
+        const bgMusic = document.getElementById('bg-music');
+        const musicIcon = document.getElementById('music-icon');
+
+        let isMusicPlaying = false;
+
+        // Intentar iniciar música al cargar (puede fallar por políticas de navegador)
+        window.addEventListener('load', () => {
+            bgMusic.play().then(() => {
+                isMusicPlaying = true;
+                musicIcon.innerText = "🔊";
+            }).catch(() => {
+                console.log("Autoplay bloqueado. Esperando interacción.");
+            });
+        });
+
+        function toggleMusic() {
+            if (isMusicPlaying) {
+                bgMusic.pause();
+                musicIcon.innerText = "🔇";
+            } else {
+                bgMusic.play();
+                musicIcon.innerText = "🔊";
+            }
+            isMusicPlaying = !isMusicPlaying;
+        }
+
+        function playMusicOnInteraction() {
+            if (!isMusicPlaying) {
+                bgMusic.play().then(() => {
+                    isMusicPlaying = true;
+                    musicIcon.innerText = "🔊";
+                });
+            }
+        }
 
         // Letras por revelar (sin espacios)
         let indicesToReveal = [];
@@ -574,6 +644,7 @@
             balloon.style.animationDuration = (6 + Math.random() * 5) + 's';
 
             const handlePop = (e) => {
+                playMusicOnInteraction(); // Activa música al primer pop
                 const rect = balloon.getBoundingClientRect();
                 triggerFirework(rect.left + rect.width / 2, rect.top + rect.height / 2);
                 balloon.remove();
@@ -628,6 +699,7 @@
         }
 
         function hideGame() {
+            playMusicOnInteraction(); // Asegura música al entrar
             const intro = document.getElementById('intro-game');
             const introSubtitle = document.getElementById('intro-subtitle');
 
