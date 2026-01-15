@@ -319,11 +319,11 @@
 <body class="overflow-x-hidden selection:bg-pink-200">
 
     <!-- Elemento de Audio -->
-    <audio id="bg-music" loop preload="auto">
-        <!-- PEGA TU ENLACE AQUÍ: Borra la URL de abajo y pon tu link directo que termine en .mp3 -->
-        <source src="./song.mp3" type="audio/mpeg">
-        <!--source src="https://giorey.github.io/invite-juan/song.mp3" type="audio/mpeg"-->
-    </audio>
+        <audio id="bg-music" loop preload="auto">
+            <!-- PEGA TU ENLACE AQUÍ: Borra la URL de abajo y pon tu link directo que termine en .mp3 -->
+            <source src="./song.mp3" type="audio/mpeg">
+            <!--source src="https://giorey.github.io/invite-juan/song.mp3" type="audio/mpeg"-->
+        </audio>
 
     <!-- Botón de Control de Música -->
     <div id="music-control" onclick="toggleMusic()">
@@ -333,14 +333,15 @@
     <!-- Pantalla Inicial de Juego -->
     <div id="intro-game">
         <div id="game-content" class="z-20 px-4 w-full transition-all duration-700">
-            <h2 id="intro-subtitle" class="text-pink-400 font-bold uppercase tracking-[0.3em] text-[10px] md:text-xs mb-12">Descubre el nombre de
+            <h2 id="intro-subtitle" class="text-pink-600 font-bold uppercase tracking-[0.3em] text-[10px] md:text-xs mb-12">Descubre el nombre de
                 nuestra pequeña</h2>
 
             <div id="name-display" class="mb-16 select-none flex justify-center flex-nowrap items-end overflow-visible">
                 <!-- Generado por JS -->
             </div>
 
-            <div id="game-status" class="text-pink-300 text-sm italic animate-pulse bg-white/40 inline-block px-6 py-2 rounded-full backdrop-blur-sm">
+            <div id="game-status"
+                class="text-pink-600 text-base md:text-lg font-bold italic animate-pulse bg-white/60 inline-block px-8 py-3 rounded-full backdrop-blur-sm shadow-sm">
                 🎈 ¡Revienta los globos para revelar el nombre! 🎈
             </div>
 
@@ -369,14 +370,14 @@
             <div class="text-[100px] md:text-[140px] drop-shadow-xl">🎀</div>
         </div>
         <div class="reveal">
-            <span class="text-pink-400 uppercase tracking-[0.4em] text-xs font-bold mb-4 block">Estás invitado</span>
+            <span class="text-pink-600 uppercase tracking-[0.4em] text-xs font-bold mb-4 block">Estás invitado</span>
             <!-- ID hero-name para sincronizar con el efecto hero -->
             <h1 id="hero-name" class="font-cursive text-7xl md:text-9xl text-pink-500 mb-6 drop-shadow-sm">Emma Sofía</h1>
-            <p class="text-pink-400 italic text-lg max-w-xs mx-auto mb-12">a mi Baby Shower</p>
+            <p class="text-pink-500 italic text-xl md:text-2xl max-w-xs mx-auto mb-12">a mi Baby Shower</p>
 
             <!-- Flecha interactiva -->
             <button onclick="scrollToContent()"
-                class="animate-bounce mt-10 text-pink-300 hover:text-pink-500 transition-colors cursor-pointer outline-none"
+                class="animate-bounce mt-10 text-pink-400 hover:text-pink-600 transition-colors cursor-pointer outline-none"
                 aria-label="Ir al contenido">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
@@ -397,10 +398,10 @@
                 <div class="absolute -bottom-4 -right-4 text-6xl balloon-float">🎀</div>
             </div>
             <div class="card-custom p-8 md:p-12">
-                <p class="text-gray-600 leading-relaxed italic text-xl mb-6">
+                <p class="text-gray-800 leading-relaxed italic text-xl md:text-2xl mb-6 font-semibold">
                     "Con el corazón lleno de alegría queremos invitarte a celebrar el Baby Shower de nuestra amada Emma Sofía 👶💖"
                 </p>
-                <p class="text-gray-500 font-light">
+                <p class="text-gray-700 font-medium text-lg md:text-xl">
                     Estamos viviendo una etapa muy especial y nos encantaría compartir este momento tan bonito contigo.
                 </p>
             </div>
@@ -412,12 +413,12 @@
         <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-10 items-center reveal">
             <div class="text-center md:text-right space-y-4">
                 <h3 class="font-cursive text-5xl text-pink-500">¿Cuándo?</h3>
-                <p class="text-gray-400 uppercase tracking-widest text-xs font-bold">Reserva el día</p>
+                <p class="text-gray-600 uppercase tracking-widest text-xs font-bold">Reserva el día</p>
             </div>
             <div class="card-custom p-10 text-center space-y-4 border-l-8 border-pink-300">
                 <div class="text-4xl">📅</div>
-                <p class="text-2xl font-bold text-gray-700">8 de febrero de 2026</p>
-                <p class="text-pink-500 font-bold text-3xl">14:00 hrs</p>
+                <p class="text-2xl font-bold text-gray-800">8 de febrero de 2026</p>
+                <p class="text-pink-600 font-bold text-3xl">14:00 hrs</p>
             </div>
         </div>
     </section>
@@ -427,12 +428,12 @@
         <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-10 items-center reveal">
             <div class="order-2 md:order-1 card-custom p-10 text-center space-y-4 border-r-8 border-pink-300">
                 <div class="text-4xl">📍</div>
-                <p class="text-gray-700 font-bold leading-relaxed">
+                <p class="text-gray-800 font-bold text-lg leading-relaxed">
                     Ignacio Comonfort #15<br>
                     Col. Ampliación San Pedro Xalpa<br>
                     Azcapotzalco, CDMX
                 </p>
-                <p class="text-xs text-gray-400 italic">
+                <p class="text-sm md:text-base text-gray-600 italic font-semibold">
                     (Esquina con Calzada de la Naranja, a una cuadra de Av. de las Armas)
                 </p>
                 <div class="pt-6">
@@ -444,7 +445,7 @@
             </div>
             <div class="order-1 md:order-2 text-center md:text-left space-y-4">
                 <h3 class="font-cursive text-5xl text-pink-500">¿Dónde?</h3>
-                <p class="text-gray-400 uppercase tracking-widest text-xs font-bold">Te esperamos en:</p>
+                <p class="text-gray-600 uppercase tracking-widest text-xs font-bold">Te esperamos en:</p>
             </div>
         </div>
     </section>
@@ -454,7 +455,7 @@
         <div class="max-w-3xl mx-auto reveal space-y-12">
             <div class="text-center space-y-4">
                 <h3 class="font-cursive text-5xl text-pink-500">Mesa de Regalos</h3>
-                <p class="text-gray-500 italic max-w-md mx-auto">
+                <p class="text-gray-700 font-medium italic text-lg max-w-md mx-auto">
                     "Con mucho cariño preparamos una lista en Amazon para quien desee consultarla:"
                 </p>
             </div>
@@ -468,7 +469,7 @@
                     </a>
                 </div>
                 <div class="w-20 h-px bg-pink-100 mx-auto"></div>
-                <p class="text-sm text-gray-400 leading-relaxed max-w-md mx-auto italic">
+                <p class="text-base text-gray-700 leading-relaxed max-w-md mx-auto italic font-medium">
                     Si prefieres traer otro obsequio o si no te es posible, no te preocupes, tu presencia y tu cariño son lo más importante para
                     nosotros 💕
                 </p>
@@ -477,7 +478,7 @@
             <!-- Sección de Bebidas -->
             <div class="card-custom bg-white/80 p-6 text-center reveal">
                 <div class="text-3xl mb-3">🥤 🥂</div>
-                <p class="text-pink-600 font-medium text-sm leading-relaxed px-4">
+                <p class="text-pink-600 font-bold text-base md:text-lg leading-relaxed px-4">
                     Habrá bebidas sin alcohol; si deseas tomar alguna bebida alcohólica, puedes traerla con toda confianza.
                 </p>
             </div>
@@ -489,7 +490,7 @@
         <div class="max-w-xl mx-auto reveal space-y-10">
             <div class="space-y-4">
                 <h3 class="font-cursive text-6xl text-pink-500">Confirmación 💌</h3>
-                <p class="text-gray-500 font-light px-8 leading-relaxed">
+                <p class="text-gray-800 font-semibold px-8 leading-relaxed text-lg md:text-xl">
                     Para organizarnos mejor, te pedimos con cariño nos confirmes tu asistencia.
                 </p>
             </div>
@@ -500,13 +501,13 @@
                     <span>WHATSAPP AQUÍ</span>
                     <span class="text-xl">💬</span>
                 </a>
-                <p class="text-[10px] text-gray-400 uppercase tracking-widest font-bold italic">
+                <p class="text-xs md:text-sm text-gray-700 uppercase tracking-wider font-bold italic">
                     Si no recibimos respuesta, entenderemos que no podrás acompañarnos.
                 </p>
             </div>
 
             <div class="pt-10 space-y-8">
-                <p class="text-pink-400 text-sm italic px-6 leading-relaxed">
+                <p class="text-pink-600 text-base md:text-lg font-bold italic px-6 leading-relaxed">
                     ✨ Gracias por ser parte de nuestra historia y por acompañarnos en este momento tan lleno de amor. ✨
                 </p>
                 <div class="w-16 h-px bg-pink-200 mx-auto"></div>
