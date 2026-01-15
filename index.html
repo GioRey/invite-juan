@@ -29,9 +29,10 @@
     <meta name="twitter:description"
         content="Con el corazón lleno de alegría te invitamos a celebrar el Baby Shower de nuestra amada Emma Sofía 👶💖. Estamos viviendo una etapa muy especial y nos encantaría compartir este momento tan bonito contigo. 📅 8 de febrero de 2026, 14:00 hrs. 📍 Ignacio Comonfort #15, Azcapotzalco, CDMX.">
     <meta name="twitter:image" content="https://giorey.github.io/invite-juan/emma_sofia.jpeg">
-    
+
     <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎀</text></svg>">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎀</text></svg>">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -71,15 +72,19 @@
 
         #name-display {
             transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.8s ease;
+            max-width: 100vw;
+            padding: 0 10px;
         }
 
         .letter-slot {
             display: inline-block;
-            width: 35px;
-            height: 55px;
-            margin: 0 4px;
-            border-bottom: 4px solid #f472b6;
-            font-size: 2.8rem;
+            width: 8.5vw;
+            /* Ajuste fluido para móvil */
+            height: 12vw;
+            margin: 0 1vw;
+            border-bottom: 3px solid #f472b6;
+            font-size: 7.5vw;
+            /* Tipografía fluida para móvil */
             font-family: 'Dancing Script', cursive;
             color: #ec4899;
             vertical-align: bottom;
@@ -94,6 +99,7 @@
                 height: 75px;
                 font-size: 4.5rem;
                 margin: 0 8px;
+                border-bottom-width: 4px;
             }
         }
 
@@ -123,9 +129,15 @@
 
         .letter-slot.space {
             border-bottom: none;
-            width: 20px;
+            width: 4vw;
             opacity: 1;
             transform: scale(1);
+        }
+
+        @media (min-width: 640px) {
+            .letter-slot.space {
+                width: 20px;
+            }
         }
 
         .slot-underline {
@@ -137,12 +149,20 @@
             content: '';
             position: absolute;
             bottom: 0;
-            left: 5px;
-            right: 5px;
-            height: 3px;
+            left: 1px;
+            right: 1px;
+            height: 2px;
             background: #f472b6;
             border-radius: 2px;
             opacity: 0.4;
+        }
+
+        @media (min-width: 640px) {
+            .slot-underline::after {
+                height: 3px;
+                left: 5px;
+                right: 5px;
+            }
         }
 
         .slot-underline.revealed::after {
@@ -277,10 +297,10 @@
     <!-- Pantalla Inicial de Juego -->
     <div id="intro-game">
         <div id="game-content" class="z-20 px-4 w-full transition-all duration-700">
-            <!--h2 id="intro-subtitle" class="text-pink-400 font-bold uppercase tracking-[0.3em] text-[10px] md:text-xs mb-12">Descubre el nombre de
-                nuestra pequeña</h2-->
+            <h2 id="intro-subtitle" class="text-pink-400 font-bold uppercase tracking-[0.3em] text-[10px] md:text-xs mb-12">Descubre el nombre de
+                nuestra pequeña</h2>
 
-            <div id="name-display" class="mb-16 select-none flex justify-center flex-wrap items-end">
+            <div id="name-display" class="mb-16 select-none flex justify-center flex-nowrap items-end overflow-visible">
                 <!-- Generado por JS -->
             </div>
 
@@ -587,7 +607,7 @@
 
         function endGame() {
             // Eliminamos el texto de bienvenida en el marcador
-            gameStatus.style.display = 'none';
+            if (gameStatus) gameStatus.style.display = 'none';
 
             // Fuegos artificiales finales
             let count = 0;
@@ -599,24 +619,25 @@
                 if (count >= 15) clearInterval(interval);
             }, 300);
 
-            startMainBtn.classList.remove('hidden');
-            setTimeout(() => {
-                startMainBtn.classList.remove('scale-0');
-            }, 200);
+            if (startMainBtn) {
+                startMainBtn.classList.remove('hidden');
+                setTimeout(() => {
+                    startMainBtn.classList.remove('scale-0');
+                }, 200);
+            }
         }
 
         function hideGame() {
             const intro = document.getElementById('intro-game');
-            const gameContent = document.getElementById('game-content');
             const introSubtitle = document.getElementById('intro-subtitle');
 
             // Calculamos las posiciones para el efecto hero
             const sourceRect = nameDisplay.getBoundingClientRect();
             const targetRect = heroName.getBoundingClientRect();
 
-            // Ocultamos elementos secundarios de la carga
-            introSubtitle.style.opacity = '0';
-            startMainBtn.style.opacity = '0';
+            // Ocultamos elementos secundarios de la carga (con seguridad)
+            if (introSubtitle) introSubtitle.style.opacity = '0';
+            if (startMainBtn) startMainBtn.style.opacity = '0';
 
             // Calculamos diferencias de escala y traslación
             const scale = targetRect.width / sourceRect.width;
